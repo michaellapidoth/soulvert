@@ -30,6 +30,8 @@ Make sure the following are installed:
   brew install ffmpeg
 ```
 
+---
+
 ## Installation
 
 ```bash
@@ -42,6 +44,8 @@ source .venv/bin/activate
 pip install -e .
 ```
 
+---
+
 ## Usage
 
 - `soulvert init` will prompt you to set your download folder, will log you into soulvert and will save your config under ~/.config/soulvert/config.json .
@@ -52,9 +56,13 @@ e.g.
 soulvert run -f flac "Brian Eno Apollo"
 ```
 
+---
+
 ## Disclaimer
 
 This tool is intended only for converting and organizing music you legally own. Please respect artists’ rights and applicable copyright laws in your country.
+
+---
 
 ## License
 
