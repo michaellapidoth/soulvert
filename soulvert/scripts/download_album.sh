@@ -47,5 +47,12 @@ soulseek download -d "$tmp" -m "$FORMAT" "$SEARCH"
 album_dir=$(find "$tmp" -mindepth 1 -maxdepth 1 -type d | head -n 1)
 [[ -z $album_dir ]] && { echo "no album folder produced" >&2; exit 1; }
 
-mv "$album_dir" "$OUTDIR"/
+if [[ -d "$OUTDIR/$(basename "$album_dir")" ]]; then
+  echo "Destination exists, renaming..."
+  timestamp=$(date +%s)
+  mv "$album_dir" "$OUTDIR/$(basename "$album_dir")-$timestamp"
+else
+  mv "$album_dir" "$OUTDIR/"
+fi
+
 rmdir "$tmp"
