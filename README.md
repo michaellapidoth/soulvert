@@ -28,7 +28,7 @@ Make sure the following are installed:
 - **`ffmpeg`** (for audio conversion)  
   ```bash
   brew install ffmpeg
-```
+  ```
 
 ---
 
@@ -66,4 +66,4 @@ This tool is intended only for converting and organizing music you legally own. 
 
 ## License
 
-Released unter the MIT License.
+Released under the MIT License.
