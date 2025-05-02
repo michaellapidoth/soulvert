@@ -54,6 +54,7 @@ pip install -e .
 e.g.
 ```bash
 soulvert run -f flac "Brian Eno Apollo"
+soulvert run -f mp3 "Lucki Flawless Like Me"
 ```
 
 ---
