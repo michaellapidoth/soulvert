@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+env/
+.testenv/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# macOS metadata
+.DS_Store
+
+# VSCode / IDE configs
+.vscode/
+.idea/
+
+# System files
+Thumbs.db
