@@ -44,6 +44,16 @@ source .venv/bin/activate
 pip install -e .
 ```
 
+To install system-wide use pipx
+```bash
+brew install pipx
+```
+then restart your terminal and and while in the soulvert root run
+```bash
+pipx install --editable .
+```
+This will build and install soulvert as a global command.
+
 ---
 
 ## Usage
