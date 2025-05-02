@@ -1,4 +1,4 @@
-import sys, subprocess, pathlib, time, json
+import sys, subprocess, pathlib, time, json, shutil
 import click
 from rich.console import Console
 from importlib.resources import files
@@ -24,7 +24,7 @@ def convert_flac_to_alac(folder: pathlib.Path):
     for f in folder.rglob("*.flac"):
         alac = f.with_suffix(".m4a")
         console.print(f"[cyan]ffmpeg:[/] {f.name} → {alac.name}")
-        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", f, "-c:a", "alac", alac], check=True)
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(f), "-vn", "-c:a", "alac", str(alac)], check=True)
         f.unlink()
 
 def import_to_music(folder: pathlib.Path):
@@ -40,50 +40,50 @@ def cli():
 
 @cli.command()
 def init():
-    dl_root = click.prompt("Folder where new albums appear", default=pathlib.Path("~/Music/soulvert").expanduser(), type=pathlib.Path)
-)
+    dl_root = click.prompt(
+        "Folder where new albums appear",
+        default=pathlib.Path("~/Music/soulvert").expanduser(),
+        type=pathlib.Path,
+    )
     save_cfg({"download_root": str(dl_root)})
     console.print(f"[green]Config saved[/] → {CFG}")
     console.print("[yellow]Running initial soulseek login")
     subprocess.run(["soulseek", "login"], check=True)
 
+
 @cli.command(context_settings=dict(ignore_unknown_options=True))
-@click.option("-f", "--format", type=click.Choice(["mp3", "flac"]), default="mp3",
-              help="Ask the downloader for MP3 or FLAC.")
+@click.option(
+    "-f", "--format", "fmt",
+    type=click.Choice(["mp3", "flac"]),
+    default="mp3",
+    help="Ask the downloader for MP3 or FLAC.",
+)
 @click.argument("query", nargs=-1, required=True)
-def run(format, query):
-    """
-    soulvert -f mp3 "Artist Album"
-    """
+def run(fmt, query):
     cfg = load_cfg()
     dl_root = pathlib.Path(cfg["download_root"]).expanduser()
 
-    # bundled shell script
     script = files("soulvert.scripts").joinpath("download_album.sh")
     if not script.exists():
         console.print("[red]Bundled downloader missing![/]")
         sys.exit(1)
 
-    # 1⃣  DOWNLOAD
-   cmd = [
+    cmd = [
         str(script),
         "--format", fmt,
         "--output", str(dl_root),
         *query
     ]
-    console.print(f"[yellow]→ running:[/] {' '.join(cmd)}")
+    console.print(f"[yellow]-> running:[/] {' '.join(cmd)}")
     subprocess.run(cmd, check=True)
 
-
-    time.sleep(1)                      # ensure mtime difference
+    time.sleep(1)
     album_dir = newest_subdir(dl_root)
     console.print(f"[blue]Latest folder:[/] {album_dir}")
 
-    # 2⃣  CONVERT if needed
-    if format == "flac":
+    if fmt == "flac":
         convert_flac_to_alac(album_dir)
 
-    # 3⃣  IMPORT
     import_to_music(album_dir)
 
 if __name__ == "__main__":

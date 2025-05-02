@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+soulvert/__init__.py
+soulvert/cli.py
+soulvert.egg-info/PKG-INFO
+soulvert.egg-info/SOURCES.txt
+soulvert.egg-info/dependency_links.txt
+soulvert.egg-info/entry_points.txt
+soulvert.egg-info/requires.txt
+soulvert.egg-info/top_level.txt
+soulvert/scripts/download_album.sh

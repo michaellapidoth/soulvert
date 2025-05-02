@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: soulvert
+Version: 0.1.0
+Summary: Download albums from Soulseek, if necessary convert downloaded albums to .alac and import them into Music.app.
+Author-email: Michael <michael.morris.lapidoth@gmail.com>
+License: MIT
+Requires-Python: >=3.9
+License-File: LICENSE
+Requires-Dist: click>=8.1
+Requires-Dist: rich>=13.7
+Dynamic: license-file

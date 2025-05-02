@@ -1,0 +1,2 @@
+[console_scripts]
+soulvert = soulvert.cli:cli
