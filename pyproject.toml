@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=67", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "soulvert"
+version = "0.1.0"
+description = "Convert freshly downloaded albums and import them into Music.app."
+authors = [{ name = "Michael", email = "michael.morris.lapidoth@gmail.com" }]
+requires-python = ">=3.9"
+
+dependencies = [
+  "click>=8.1",                # CLI parsing
+  "rich>=13.7"                 # pretty console output
+]
+
+[project.scripts]              # ← console entry‑points live here
+soulvert = "soulvert.cli:cli"
+
+[tool.setuptools.package-data] # ← non‑Python files to include in the wheel
+"*" = ["scripts/*.sh"]         # ship every .sh under any package dir
