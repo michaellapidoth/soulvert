@@ -2,9 +2,9 @@
 
 **Convert freshly downloaded albums and import them into Music.app.**
 
-`soulvert` is a command-line tool for macOS that automates the final steps of music acquisition: converting lossless files to ALAC, and importing the result into the native Music.app — ready to sync across your devices.
+`soulvert` is a command-line tool for macOS that automates the steps of music acquisition: converting lossless files to ALAC, and importing the result into the native Music.app — ready to sync across your devices.
 
-You supply an artist or album name (or a Spotify link); it uses `soulseek-cli` to download the album, optionally converts FLAC to ALAC, and then adds the album to your Music library.
+You supply an artist or album name; it uses `soulseek-cli` to download the album, optionally converts FLAC to ALAC, and then adds the album to your Music library.
 
 ---
 
